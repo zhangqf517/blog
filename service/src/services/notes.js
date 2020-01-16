@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import marked from 'marked'
 
 export default {
     getNotes: async (params) => {
@@ -18,7 +19,7 @@ export default {
                     const tdir = path.join(noteUrl, filename)
                     pushToNoteList(tdir, id + '-' + count)
                 }else {
-                    noteList.push({ id: id + '-' + count, name: filename, pid: id, isDirectory: false })
+                    noteList.push({ id: id + '-' + count, name: filename, pid: id, isDirectory: false, path: file })
                 }
                 count++
             })
@@ -26,5 +27,11 @@ export default {
         pushToNoteList(notePath, '0')
         // 逻辑部分
         return noteList
+    },
+    getNoteByPath: async (params) => {
+        let note = await fs.readFileSync(params.path,'utf-8')
+        note = marked(note.toString())
+        // note = JSON.parse(note)
+        return {success: true,data: note} 
     }
 }

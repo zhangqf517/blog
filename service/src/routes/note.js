@@ -5,10 +5,19 @@ const router = new Router({
 	prefix: '/note'
 })
 
-router.get('/noteList', async (ctx) => {
+router.get('/getNoteList', async (ctx) => {
   try {
     let results = await noteController.getNotes(ctx.query)
     ctx.body = results
+  } catch (error) {
+    ctx.status = 406
+		ctx.body = e.toString()
+  }
+}),
+router.get('/getNoteByPath', async (ctx) => {
+  try {
+    let result = await noteController.getNoteByPath(ctx.query)
+    ctx.body = result
   } catch (error) {
     ctx.status = 406
 		ctx.body = e.toString()
