@@ -18,23 +18,9 @@
         <i class="el-icon-menu"></i>
         <span slot="title">主页</span>
       </el-menu-item>
-      <el-submenu :index='menuList[1].path'>
-        <template slot="title" index="menuList[0].path" @click="routeTo(menuList[1].path)">
-          <i class="el-icon-location"></i>
-          <span>关于</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item :index="menuList[2].path" @click="routeTo(menuList[2].path)">关于作者</el-menu-item>
-          <el-menu-item :index="menuList[3].path" @click="routeTo(menuList[3].path)">关于博客</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-menu-item :index="menuList[4].path" @click="routeTo(menuList[4].path)">
+      <el-menu-item :index="menuList[1].path" @click="routeTo(menuList[1].path)">
         <i class="el-icon-menu"></i>
         <span slot="title">日志</span>
-      </el-menu-item>
-      <el-menu-item :index="menuList[5].path" @click="routeTo(menuList[5].path)">
-        <i class="el-icon-document"></i>
-        <span slot="title">设置</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -57,38 +43,10 @@ export default {
           pid: '0000'
         },
         {
-          id: '1',
-          title: '关于',
-          path: '/about',
-          icon: 'el-icon-location',
-          pid: '0000'
-        },
-        {
-          id: '2',
-          title: '关于作者',
-          icon: 'el-icon-location',
-          path: '/aboutAuthor',
-          pid: '1'
-        },
-        {
-          id: '3',
-          title: '关于博客',
-          icon: 'el-icon-location',
-          path: '/aboutBlog',
-          pid: '1'
-        },
-        {
           id: '4',
           title: '日志',
           path: '/note',
           icon: 'el-icon-location',
-          pid: '0000'
-        },
-        {
-          id: '5',
-          title: '设置',
-          path: '/set',
-          icon: 'el-icon-setting',
           pid: '0000'
         }
       ],

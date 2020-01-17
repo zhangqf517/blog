@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Header from '@/components/Header.vue'
 import Home from '@/components/Home'
-import About from '@/components/About.vue'
 import Note from '@/components/Note.vue'
 
 Vue.use(Router)
@@ -20,14 +19,6 @@ export default new Router({
       components: {
         header: Header,
         main: Home
-      }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      components: {
-        header: Header,
-        main: About
       }
     },
     {

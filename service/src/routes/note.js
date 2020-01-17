@@ -22,6 +22,15 @@ router.get('/getNoteByPath', async (ctx) => {
     ctx.status = 406
 		ctx.body = e.toString()
   }
+}),
+router.get('/uploadNote', async (ctx) => {
+  try {
+    let result = await noteController.uploadNoteByPath(ctx.query)
+    ctx.body = result
+  } catch (error) {
+    ctx.status = 406
+		ctx.body = e.toString()
+  }
 })
 
 module.exports = router

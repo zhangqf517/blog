@@ -1,6 +1,9 @@
 <template>
   <div>
     <el-button class="backfile" @click="backFile()">返回</el-button>
+    <el-input v-model="uploadFilePath" style="width:400px;"></el-input>
+    <el-input v-model="uploadFileType" style="width:100px;"></el-input>
+    <el-button class="backfile" @click="upload()">写博客</el-button>
     <div v-for="item in currentFiles" v-bind:key="item.id" @click="clickFile(item)" v-show="isCatalog">
       {{item.name}}
     </div>
@@ -20,14 +23,16 @@ export default {
       currentFileId: '', // 当前页面文件ID
       currentFiles: [], // 存储当前展示文件
       isCatalog: true, // 当前是否显示目录
-      content: '' // 存储当前文件内容
+      content: '', // 存储当前文件内容
+      uploadFilePath: '', // 上传的note地址
+      uploadFileType: '' // 上传的note类型
     }
   },
   mounted () {
     this.loadNoteList()
   },
   methods: {
-    ...mapActions(['getNoteList', 'getNote']),
+    ...mapActions(['getNoteList', 'getNote', 'uploadNote']),
     // 获得日志列表
     loadNoteList () {
       this.getNoteList().then(res => {
@@ -78,6 +83,20 @@ export default {
         })
         this.currentFileId = this.currentFiles[0].pid
       }
+    },
+    // 上传文件
+    upload () {
+      if (this.uploadFilePath === '' || this.uploadFileType === '') {
+        alert('地址或类型不能为空！')
+        return
+      }
+      this.uploadNote({path: this.uploadFilePath, type: this.uploadFileType}).then(res => {
+        if (res.success) {
+          alert('上传成功')
+        } else {
+          alert(res.msg ? res.msg : '上传失败！')
+        }
+      })
     }
   }
 }

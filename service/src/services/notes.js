@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import marked from 'marked'
+import noteDBService from './noteDBService'
+const moment = require('moment');
 
 export default {
     getNotes: async (params) => {
@@ -29,9 +31,30 @@ export default {
         return noteList
     },
     getNoteByPath: async (params) => {
+        console.log(params.path)
+        let noteDB = await noteDBService.find({condition:{'iddd':'686'}}) 
         let note = await fs.readFileSync(params.path,'utf-8')
+        // await noteDBService.save({
+        //     iddd:'686',
+        //     state:'正常',
+        //     content:note
+        // })
         note = marked(note.toString())
-        // note = JSON.parse(note)
         return {success: true,data: note} 
+    },
+    uploadNoteByPath: async (params) => {
+        try {
+            let note = await fs.readFileSync(params.path,'utf-8')
+            await noteDBService.save({
+                path:params.path,
+                type:params.type,
+                content:note,
+                lastUpdateTime:moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+                name:params.path.slice(params.path.lastIndexOf('\\')+1)
+            })
+        } catch (error) {
+            return {success: false,msg: '读取文件失败，请检查地址是否正确'}
+        }
+        return {success: true}
     }
 }

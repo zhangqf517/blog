@@ -8,6 +8,10 @@ const actions = {
   async getNote ({ commit }, data) {
     let note = await noteService.getNodeByPath(data)
     return note
+  },
+  async uploadNote ({commit}, data) {
+    let results = await noteService.uploadNote(data)
+    return results
   }
 }
 export default actions
