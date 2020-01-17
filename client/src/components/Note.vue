@@ -2,7 +2,6 @@
   <div>
     <el-button class="backfile" @click="backFile()">返回</el-button>
     <el-input v-model="uploadFilePath" style="width:400px;"></el-input>
-    <el-input v-model="uploadFileType" style="width:100px;"></el-input>
     <el-button class="backfile" @click="upload()">写博客</el-button>
     <div v-for="item in currentFiles" v-bind:key="item.id" @click="clickFile(item)" v-show="isCatalog">
       {{item.name}}
@@ -24,8 +23,7 @@ export default {
       currentFiles: [], // 存储当前展示文件
       isCatalog: true, // 当前是否显示目录
       content: '', // 存储当前文件内容
-      uploadFilePath: '', // 上传的note地址
-      uploadFileType: '' // 上传的note类型
+      uploadFilePath: '' // 上传的note地址
     }
   },
   mounted () {
@@ -90,7 +88,7 @@ export default {
         alert('地址或类型不能为空！')
         return
       }
-      this.uploadNote({path: this.uploadFilePath, type: this.uploadFileType}).then(res => {
+      this.uploadNote({path: this.uploadFilePath}).then(res => {
         if (res.success) {
           alert('上传成功')
         } else {

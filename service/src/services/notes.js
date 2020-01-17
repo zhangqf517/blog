@@ -44,10 +44,12 @@ export default {
     },
     uploadNoteByPath: async (params) => {
         try {
+            let type = params.path.slice(params.path.lastIndexOf('\\blog\\blog')+11)
+            type = type.slice(0, type.indexOf('\\'))
             let note = await fs.readFileSync(params.path,'utf-8')
             await noteDBService.save({
                 path:params.path,
-                type:params.type,
+                type:type,
                 content:note,
                 lastUpdateTime:moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
                 name:params.path.slice(params.path.lastIndexOf('\\')+1)
