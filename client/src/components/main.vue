@@ -27,10 +27,9 @@ export default {
     }
   },
   mounted () {
-    this.loadNoteList()
   },
   methods: {
-    ...mapActions(['getNoteList', 'getNote', 'uploadNote']),
+    ...mapActions(['getNoteList', 'getNote', 'uploadNote', 'loadNoteType', 'getNoteListByType']),
     // 获得日志列表
     loadNoteList () {
       this.getNoteList().then(res => {
@@ -64,7 +63,6 @@ export default {
               })
             })
             this.isCatalog = false
-            console.log(res)
           }
         })
       }
@@ -95,7 +93,13 @@ export default {
           alert(res.msg ? res.msg : '上传失败！')
         }
       })
+    },
+    changeType (type) {
+      this.getNoteListByType({type: type}).then(res => {
+        this.currentFiles = res.data
+      })
     }
+
   }
 }
 </script>

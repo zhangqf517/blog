@@ -12,6 +12,14 @@ const actions = {
   async uploadNote ({commit}, data) {
     let results = await noteService.uploadNote(data)
     return results
+  },
+  async loadNoteType ({commit}, data) {
+    let typeList = await noteService.loadNoteType(data)
+    return typeList
+  },
+  async getNoteListByType ({commit}, data) {
+    let typeList = await noteService.getNoteListByType(data)
+    return typeList
   }
 }
 export default actions

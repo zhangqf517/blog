@@ -1,56 +1,24 @@
 <template>
   <div class="main">
     <div class="profile">
-      <router-link to="/home">
-        <img src='../assets/photo.jpg'>
-      </router-link>
+      个人博客
     </div>
-    <div class="site-identify">
-      <h4>zqf</h4>
+    <div class="menulist">
+      <div class="typelist" v-for="item in typeList" v-bind:key="item" @click="changeType(item)">
+        <div class="type">{{item}}</div>
+      </div>
     </div>
-    <el-menu
-      :default-active="$route.path"
-      class="el-menu-vertical-demo"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
-      <el-menu-item :index="menuList[0].path" @click="routeTo(menuList[0].path)">
-        <i class="el-icon-menu"></i>
-        <span slot="title">主页</span>
-      </el-menu-item>
-      <el-menu-item :index="menuList[1].path" @click="routeTo(menuList[1].path)">
-        <i class="el-icon-menu"></i>
-        <span slot="title">日志</span>
-      </el-menu-item>
-    </el-menu>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Header',
   data () {
     return {
-      circleUrl: '../assets/photo.jpg',
-      squareUrl: 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png==========',
-      size: 200,
-      menuList: [
-        {
-          id: '0',
-          title: '主页',
-          path: '/home',
-          icon: 'el-icon-location',
-          pid: '0000'
-        },
-        {
-          id: '4',
-          title: '日志',
-          path: '/note',
-          icon: 'el-icon-location',
-          pid: '0000'
-        }
-      ],
-      currMenu: '0'
+      typeList: [],
+      currType: ''
     }
   },
   watch: {
@@ -64,18 +32,20 @@ export default {
     }
   },
   mounted () {
+    this.loadNotesType()
   },
   methods: {
-    routeTo (path) {
-      this.$router.push(path)
-      console.log(path)
-      // let hasSubMenu = path.indexOf('-')
-      // if (hasSubMenu !== -1) {
-      //   this.currMenu = this.menuList[path.slice(0, path.indexOf('-'))].subMenu[path.slice(path.indexOf('-') + 1)]
-      // } else {
-      //   this.currMenu = this.menuList[path]
-      // }
-      // alert(path);
+    ...mapActions(['loadNoteType', 'getNoteListByType']),
+    // 加载note类型
+    loadNotesType () {
+      this.loadNoteType().then(res => {
+        for (const item of res.typeList) {
+          this.typeList.push(item)
+        }
+      })
+    },
+    changeType (type) {
+      this.$emit('changeType', type)
     }
   }
 }
@@ -91,22 +61,22 @@ export default {
 
 <style scoped>
   .main{
-    background-color: rgb(73, 71, 71);
+    background-color: rgb(230, 188, 188);
   }
   .profile{
     margin: 20px auto;
   }
-  .profile img{
-    border-radius: 50%;
+  .menulist{
+    display:flex;
+    height: 40px;
+  }
+  .typelist{
     width: 100px;
-    height: 100px;
+    margin: 10px;
   }
-  .site-identify{
-    text-align: center;
-  }
-  .mainMenu{
-    text-align: center;
-    height: 50px;
-    padding: 0 20px;
+  .type{
+    width: 100px;
+    background-color: white;
+    border: 1px solid yellow;
   }
 </style>

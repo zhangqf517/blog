@@ -31,6 +31,24 @@ router.get('/uploadNote', async (ctx) => {
     ctx.status = 406
 		ctx.body = e.toString()
   }
+}),
+router.get('/loadNoteType', async (ctx) => {
+  try {
+    let result = await noteController.loadNoteType(ctx.query)
+    ctx.body = result
+  } catch (error) {
+    ctx.status = 406
+		ctx.body = e.toString()
+  }
+}),
+router.get('/getNoteListByType', async (ctx) => {
+  try {
+    let result = await noteController.getNoteListByType(ctx.query)
+    ctx.body = result
+  } catch (error) {
+    ctx.status = 406
+		ctx.body = e.toString()
+  }
 })
 
 module.exports = router

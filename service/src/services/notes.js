@@ -58,5 +58,26 @@ export default {
             return {success: false,msg: '读取文件失败，请检查地址是否正确'}
         }
         return {success: true}
+    },
+    loadNoteType: async (params) => {
+        try {
+            let noteList = await noteDBService.find({})
+            let typeList = []
+            for (const item of noteList) {
+                if(typeList.indexOf(item.type)){
+                    typeList.push(item.type)
+                }
+            }
+            typeList.sort()
+            return {success: true,typeList}
+        } catch (error) {
+            return {success: false,msg: 'error'}
+        }
+        return {success: true}
+    },
+    getNoteListByType: async (params) => {
+        console.log(params.path)
+        let noteDB = await noteDBService.find({condition:{'type': params.type}}) 
+        return {success: true,data: noteDB} 
     }
 }
