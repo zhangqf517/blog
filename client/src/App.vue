@@ -20,21 +20,24 @@ export default {
 
 <style>
 #app{
-  position: absolute;
-  top: 0px;
-  left: 0px;
   width: 100%;
-  height: 100%;
-  background-color: rgb(226, 230, 220);
+  min-height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.whitePaper {
+  box-sizing: border-box;
+  margin: 0px 100px;
+  background-color: whitesmoke;
+  min-height: 640px;
 }
 .header{
   box-sizing: border-box;
   padding: 10px 25px;
   margin: 0px auto;
-  margin-top: 40px;
   height: 200px;
   max-width: 1200px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .content{
   padding: 10px 25px;
@@ -42,15 +45,7 @@ export default {
   margin: 0px auto;
   min-height: calc(100% - 240px);
   max-width: 1200px;
-  border: 1px solid red;
-}
-.whitePaper {
-    position: absolute;
-    background-color: whitesmoke;
-    top: 50px;
-    left: 100px;
-    right: 100px;
-    bottom: 0px;
+  /* border: 1px solid red; */
 }
 
 </style>

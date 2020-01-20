@@ -64,7 +64,7 @@ export default {
             let noteList = await noteDBService.find({})
             let typeList = []
             for (const item of noteList) {
-                if(typeList.indexOf(item.type)){
+                if(typeList.indexOf(item.type) === -1){
                     typeList.push(item.type)
                 }
             }

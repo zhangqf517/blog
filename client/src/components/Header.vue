@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="profile">
-      个人博客
+      <div class="personBlog">个人博客</div>
     </div>
     <div class="menulist">
       <div class="typelist" v-for="item in typeList" v-bind:key="item" @click="changeType(item)">
@@ -22,9 +22,6 @@ export default {
     }
   },
   watch: {
-    currMenu: function (newVal, oldVal) {
-      console.log('-----------old,new----------')
-    }
   },
   computed: {
     defaultActive () {
@@ -39,9 +36,14 @@ export default {
     // 加载note类型
     loadNotesType () {
       this.loadNoteType().then(res => {
+        console.log(res.typeList)
+        if (res.typeList.length === 0) {
+          return
+        }
         for (const item of res.typeList) {
           this.typeList.push(item)
         }
+        this.changeType(this.typeList[0])
       })
     },
     changeType (type) {
@@ -61,13 +63,20 @@ export default {
 
 <style scoped>
   .main{
-    background-color: rgb(230, 188, 188);
+    /* background-color: rgb(230, 188, 188); */
   }
   .profile{
     margin: 20px auto;
+    height: 100px;
+  }
+  .personBlog{
+    font-weight: 600;
+    font-size: 30px;
   }
   .menulist{
     display:flex;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     height: 40px;
   }
   .typelist{
@@ -76,7 +85,14 @@ export default {
   }
   .type{
     width: 100px;
-    background-color: white;
-    border: 1px solid yellow;
+    text-align: center;
+    color: rgb(134, 131, 119);
+    /* background-color: white;
+    border: 1px solid yellow; */
+  }
+  .type:hover{
+    color: rgb(68, 50, 50);
+    font-weight: 600;
+    cursor: pointer;
   }
 </style>
