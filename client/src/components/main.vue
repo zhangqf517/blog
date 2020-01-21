@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-button class="backfile" @click="backFile()">返回</el-button>
-    <el-input v-model="uploadFilePath" style="width:400px;"></el-input>
-    <el-button class="backfile" @click="upload()">写博客</el-button>
-    <el-button class="backfile" @click="check_up()">检查更新</el-button>
+    <el-input v-model="uploadFilePath" style="width:400px;float:right;"></el-input>
+    <el-button class="backfile" @click="upload()" style="float:right;">写博客</el-button>
+    <el-button class="backfile" @click="check_up()" style="float:right;">检查更新</el-button>
     <div class="eachNote" v-for="item in currentFiles" v-bind:key="item.id" @click="clickFile(item)" v-show="isCatalog">
       {{item.name}}
     </div>

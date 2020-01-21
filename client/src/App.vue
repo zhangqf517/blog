@@ -28,8 +28,10 @@ export default {
 .whitePaper {
   box-sizing: border-box;
   margin: 0px 100px;
+  margin-right: calc(100% + 100px - 100vw);
   background-color: whitesmoke;
   min-height: 640px;
+
 }
 .header{
   box-sizing: border-box;
