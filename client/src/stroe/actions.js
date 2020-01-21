@@ -20,6 +20,10 @@ const actions = {
   async getNoteListByType ({commit}, data) {
     let typeList = await noteService.getNoteListByType(data)
     return typeList
+  },
+  async updata ({commit}, data) {
+    let results = await noteService.updata(data)
+    return results
   }
 }
 export default actions

@@ -49,6 +49,15 @@ router.get('/getNoteListByType', async (ctx) => {
     ctx.status = 406
 		ctx.body = e.toString()
   }
+}),
+router.get('/updataNote', async (ctx) => {
+  try {
+    let result = await noteController.updataNote(ctx.query)
+    ctx.body = result
+  } catch (error) {
+    ctx.status = 406
+		ctx.body = e.toString()
+  }
 })
 
 module.exports = router

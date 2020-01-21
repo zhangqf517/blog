@@ -4,7 +4,8 @@ const note = {
   getNodeByPath: (query) => axios.setAxiosGetPromise('note/getNoteByPath', query),
   uploadNote: (query) => axios.setAxiosGetPromise('note/uploadNote', query),
   loadNoteType: (query) => axios.setAxiosGetPromise('note/loadNoteType', query),
-  getNoteListByType: (query) => axios.setAxiosGetPromise('note/getNoteListByType', query)
+  getNoteListByType: (query) => axios.setAxiosGetPromise('note/getNoteListByType', query),
+  updata: (query) => axios.setAxiosGetPromise('note/updataNote', query)
 }
 
 export default note

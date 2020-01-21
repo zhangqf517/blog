@@ -7,4 +7,5 @@ export default {
     uploadNoteByPath: async (params) => await noteService.uploadNoteByPath(params),
     loadNoteType: async(params) => await noteService.loadNoteType(params),
     getNoteListByType: async(params) => await noteService.getNoteListByType(params),
+    updataNote: async(params) => await noteService.updataNote(params),
 }

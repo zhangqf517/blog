@@ -3,6 +3,7 @@
     <el-button class="backfile" @click="backFile()">返回</el-button>
     <el-input v-model="uploadFilePath" style="width:400px;"></el-input>
     <el-button class="backfile" @click="upload()">写博客</el-button>
+    <el-button class="backfile" @click="check_up()">检查更新</el-button>
     <div class="eachNote" v-for="item in currentFiles" v-bind:key="item.id" @click="clickFile(item)" v-show="isCatalog">
       {{item.name}}
     </div>
@@ -30,7 +31,7 @@ export default {
   mounted () {
   },
   methods: {
-    ...mapActions(['getNoteList', 'getNote', 'uploadNote', 'loadNoteType', 'getNoteListByType']),
+    ...mapActions(['getNoteList', 'getNote', 'uploadNote', 'loadNoteType', 'getNoteListByType', 'updata']),
     // 获得日志列表
     loadNoteList () {
       this.getNoteList().then(res => {
@@ -101,6 +102,12 @@ export default {
       this.currentType = type
       this.getNoteListByType({type: type}).then(res => {
         this.currentFiles = res.data
+      })
+    },
+    check_up () {
+      this.updata().then(res => {
+        console.log(res)
+        alert(res.msg)
       })
     }
 
