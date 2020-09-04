@@ -25,7 +25,7 @@
     "koa2-cors": "^2.0.6",
     "marked": "^0.8.0",
     "moment": "^2.24.0",
-    "mongodb": "^2.2.33",
+    "mongodb": "^3.1.13",
     "pug": "^2.0.3"
   },
   "devDependencies": {
